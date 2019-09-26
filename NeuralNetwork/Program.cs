@@ -10,6 +10,12 @@ namespace NeuralNetwork
     {
         static void Main(string[] args)
         {
+            NumberRecognizer numberRecognizer = new NumberRecognizer();
+
+            numberRecognizer.Train(50);
+
+            Console.WriteLine("end");
+            Console.ReadKey();
         }
     }
 }
