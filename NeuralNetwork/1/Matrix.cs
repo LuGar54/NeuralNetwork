@@ -9,6 +9,18 @@ namespace NeuralNetwork
 
         Random random;
 
+        public static Matrix operator* (float num, Matrix matrix)
+        {
+            for (int i = 0; i < matrix.rows; i++)
+            {
+                for (int j = 0; j < matrix.cols; j++)
+                {
+                    matrix.matrix[i, j] *= num;
+                }
+            }
+            return matrix;
+        }
+
         public Matrix(int r, int c)
         {
             rows = r;
@@ -112,10 +124,30 @@ namespace NeuralNetwork
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    n.matrix[i, j] = Relu(matrix[i, j]);
+                    n.matrix[i, j] = Sigmoid(matrix[i, j]);
                 }
             }
             return n;
+        }
+
+        public Matrix GiveLog()
+        {
+            Matrix clone = this.Clone();
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    clone.matrix[i, j] = (float)Math.Log(clone.matrix[i, j]);
+                }
+            }
+
+            return clone;
+        }
+
+        public float Sigmoid(float x)
+        {
+            return (float)(1 / (1 + Math.Exp(-x)));
         }
 
         public float Relu(float x)
@@ -135,7 +167,7 @@ namespace NeuralNetwork
                         double u1 = 1.0 - random.NextDouble(); //uniform(0,1] random doubles
                         double u2 = 1.0 - random.NextDouble();
                         double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); //random normal(0,1)
-                        
+
                         matrix[i, j] += (float)randStdNormal / 5;
 
                         if (matrix[i, j] > 1)

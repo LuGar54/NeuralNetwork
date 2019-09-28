@@ -10,9 +10,20 @@ namespace NeuralNetwork
     {
         static void Main(string[] args)
         {
-            NumberRecognizer numberRecognizer = new NumberRecognizer();
+            //NumberRecognizer numberRecognizer = new NumberRecognizer();
 
-            numberRecognizer.Train(50);
+            //numberRecognizer.Train(90);
+
+            //Console.WriteLine("end");
+            //Console.ReadKey();
+
+            NumberNeuralNet num = new NumberNeuralNet();
+
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(num.Train());
+            }
+
 
             Console.WriteLine("end");
             Console.ReadKey();

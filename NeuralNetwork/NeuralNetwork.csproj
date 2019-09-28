@@ -47,9 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Matrix.cs" />
-    <Compile Include="NeuralNet.cs" />
-    <Compile Include="NumberRecognizer.cs" />
+    <Compile Include="1\Matrix.cs" />
+    <Compile Include="1\Network.cs" />
+    <Compile Include="Attempt3\Activation.cs" />
+    <Compile Include="Attempt3\Layer.cs" />
+    <Compile Include="Attempt3\NeuralNet.cs" />
+    <Compile Include="2\NumberNeuralNet.cs" />
+    <Compile Include="1\NumberRecognizer.cs" />
+    <Compile Include="Attempt3\Neuron.cs" />
+    <Compile Include="Attempt3\Weight.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1859,5 +1865,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

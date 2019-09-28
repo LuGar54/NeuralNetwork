@@ -78,6 +78,11 @@ namespace NeuralNetwork
             return highestIndex;
         }
 
+        //public float CrossEntropyLoss(Matrix answer, Matrix guess)
+        //{
+        //    //return answer.Dot(guess.GiveLog());
+        //}
+
         public NeuralNet Crossover(NeuralNet partner)
         {
             NeuralNet child = new NeuralNet(iNodes, hNodes, oNodes, hLayers);

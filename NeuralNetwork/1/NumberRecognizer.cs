@@ -13,24 +13,24 @@ namespace NeuralNetwork
         NeuralNet net;
 
 
-        List<float[]>[] trainingDataSet;
+        List<ImageWithNumber> trainingDataSet;
 
         int dataCount = 0;
 
         public NumberRecognizer()
         {
-            net = new NeuralNet(784, 10, 10, 1);
-            trainingDataSet = new List<float[]>[10];
-            for (int i = 0; i < trainingDataSet.Length; i++)
+            net = new NeuralNet(784, 16, 10, 1);
+            trainingDataSet = new List<ImageWithNumber>();
+            for (int i = 0; i < 10; i++)
             {
-                trainingDataSet[i] = new List<float[]>();
+
                 string[] filePaths = Directory.GetFiles("Images/" + i + "/", "*.jpg");
                 foreach (var image in filePaths)
                 {
 
                     Bitmap bitmap = new Bitmap(image);
 
-                    float[] currentImage = new float[bitmap.Height * bitmap.Width];
+                    ImageWithNumber currentImage = new ImageWithNumber(new float[bitmap.Height * bitmap.Width], i);
 
                     for (int j = 0; j < bitmap.Width; j++)
                     {
@@ -38,16 +38,21 @@ namespace NeuralNetwork
                         {
                             Color currentPixel = bitmap.GetPixel(j, k);
 
-                            currentImage[j * bitmap.Width + k] = ((currentPixel.R * 0.3f) + (currentPixel.G * 0.59f) + (currentPixel.B * 0.11f)) / 255f;
+                            currentImage.image[j * bitmap.Width + k] = ((currentPixel.R * 0.3f) + (currentPixel.G * 0.59f) + (currentPixel.B * 0.11f)) / 255f;
                         }
                     }
 
-                    trainingDataSet[i].Add(currentImage);
+                    trainingDataSet.Add(currentImage);
                     ++dataCount;
                 }
             }
         }
 
+        /// <summary>
+        /// Trains up to the specified training threshold.
+        /// TODO: On pourrait ajouter un threshold pour notre loss function.
+        /// </summary>
+        /// <param name="trainingThreshold">The training threshold.</param>
         public void Train(float trainingThreshold)
         {
             float successRate = 0;
@@ -56,10 +61,8 @@ namespace NeuralNetwork
             NeuralNet old = net.Clone();
             while ((successRate = GetSuccessRate()) < trainingThreshold)
             {
-
                 if (oldSuccessRate < successRate)
                 {
-
                     gen++;
                     Console.WriteLine("gen : " + gen + " % : " + successRate);
 
@@ -72,18 +75,29 @@ namespace NeuralNetwork
             }
         }
 
+        /// <summary>
+        /// Gets the success rate.
+        /// TODO: À AMÉLIORER
+        /// En gros ça c'est notre cost function.
+        /// La cost function prend le résultat de plein de loss function, pis check le % de réussite.
+        /// En combinaison avec le loss, ça permet de vérifier que notre backpropagation n'est pas trop spécifique, 
+        /// donc qu'il n'essait pas d'avoir raison sur juste un type de données.
+        /// </summary>
+        /// <returns></returns>
         public float GetSuccessRate()
         {
+
+
             float numberSuccess = 0;
 
-            for (int i = 0; i < trainingDataSet.Length; i++)
+            foreach (var image in trainingDataSet)
             {
-                foreach (var image in trainingDataSet[i])
+                //En gros ça c'est notre loss function, mais c'en est une très peu modulaire(AKA 2 réponses plutôt qu'un intervale (e(0,1) vs e[0,1])).
+                //Donc 2 modèles différents pourraient donner le même loss, même si un des deux est techniquement meilleur.
+                //TODO: À FAIRE
+                if (net.HighestOutput(image.image) == image.number)
                 {
-                    if (net.HighestOutput(image) == i)
-                    {
-                        numberSuccess++;
-                    }
+                    numberSuccess++;
                 }
             }
 
