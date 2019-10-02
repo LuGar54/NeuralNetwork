@@ -8,14 +8,14 @@ namespace NeuralNetwork.Attempt3
 {
     static class Activation
     {
-        public static float Sigmoid(this float value)
+        public static double Sigmoid(this double value)
         {
             return (float)(1 / (1 + Math.Exp(-value)));
         }
 
-        public static float SigmoidDerivative(this float value)
+        public static double SigmoidDerivative(this double value)
         {
-            return Sigmoid(value) * (1 - Sigmoid(value));
+            return value * (1 - value);
         }
     }
 }

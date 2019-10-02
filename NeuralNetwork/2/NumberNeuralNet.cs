@@ -53,7 +53,7 @@ namespace NeuralNetwork
     {
         private const int NBR_INPUTS = 784;
         private const int NBR_HIDDEN_LAYERS = 1;
-        private const int NBR_NODES_PER_HIDDEN_LAYER = 8;
+        private const int NBR_NODES_PER_HIDDEN_LAYER = 100;
         private const int NBR_OUTPUTS = 10;
 
         List<ImageWithNumber> trainingDataSet;
