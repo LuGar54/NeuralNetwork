@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     abstract class Neuron
     {
         public double Value { get; protected set; }

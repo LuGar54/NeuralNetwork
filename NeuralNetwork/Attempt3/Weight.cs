@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     class Weight
     {
         private const double LEARN_RATE = 0.001;
-
-        private static int weightCount = 0;
-
-        private int id;
 
         private Neuron from;
         private Neuron to;
@@ -23,10 +20,6 @@ namespace NeuralNetwork.Attempt3
 
         public Weight(Neuron from, Neuron to, double value)
         {
-            weightCount++;
-
-            id = weightCount;
-
             this.from = from;
             from.rightWeights.Add(this);
 

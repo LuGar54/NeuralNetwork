@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +10,26 @@ namespace NeuralNetwork.Attempt3
 {
     class NetworkEvaluator
     {
+        private const string DATA_FILENAME = "save.dat";
+
         private Network network;
 
         private List<ImageData> images;
 
+        private BinaryFormatter formatter;
+
         public NetworkEvaluator()
         {
-            network = new Network();
+            formatter = new BinaryFormatter();
+
+            if (File.Exists(DATA_FILENAME))
+            {
+                Load();
+            }
+            else
+            {
+                network = new Network();
+            }
 
             images = ImageData.LoadImages("Images");
         }
@@ -31,7 +46,7 @@ namespace NeuralNetwork.Attempt3
 
                 successPerNumber.Item2[10]++;
 
-                if(network.GetAnswer() == image.number)
+                if (network.GetAnswer() == image.number)
                 {
                     successPerNumber.Item1[10]++;
                     successPerNumber.Item1[image.number]++;
@@ -42,7 +57,46 @@ namespace NeuralNetwork.Attempt3
                 network.PropagateBack(image.expected);
             }
 
+            Save();
+
             return successPerNumber;
+        }
+
+        private void Save()
+        {
+            try
+            {
+                FileStream writerFileStream = new FileStream(DATA_FILENAME, FileMode.Create, FileAccess.Write);
+
+                formatter.Serialize(writerFileStream, network);
+
+                writerFileStream.Close();
+
+                Console.WriteLine("Saved successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Saving error");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public void Load()
+        {
+            try
+            {
+                FileStream readerFileStream = new FileStream(DATA_FILENAME, FileMode.Open, FileAccess.Read);
+
+                network = (Network)formatter.Deserialize(readerFileStream);
+
+                readerFileStream.Close();
+
+                Console.WriteLine("Loaded successfully");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Loading error");
+            }
         }
 
     }

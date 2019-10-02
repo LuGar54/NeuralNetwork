@@ -1,5 +1,8 @@
-﻿namespace NeuralNetwork.Attempt3
+﻿using System;
+
+namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     class Network
     {
         private InputLayer inputLayer;

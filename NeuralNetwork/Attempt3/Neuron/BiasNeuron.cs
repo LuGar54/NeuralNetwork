@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     class BiasNeuron : InputNeuron
     {
         public BiasNeuron()

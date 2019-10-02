@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     class HiddenLayer : Layer
     {
         public HiddenLayer(Layer previousLayer, int nbrNeurons)

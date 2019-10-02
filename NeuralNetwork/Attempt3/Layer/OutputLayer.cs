@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork.Attempt3
 {
+    [Serializable]
     class OutputLayer : Layer
     {
         public OutputLayer(Layer lastHiddenLayer, int nbrNeurons)
