@@ -13,8 +13,8 @@ namespace NeuralNetwork.Attempt3
         {
             inputLayer = new InputLayer(784);
             hiddenLayers = new HiddenLayer[2];
-            hiddenLayers[0] = new HiddenLayer(inputLayer, 500);
-            hiddenLayers[1] = new HiddenLayer(inputLayer, 100);
+            hiddenLayers[0] = new HiddenLayer(inputLayer, 28);
+            hiddenLayers[1] = new HiddenLayer(inputLayer, 28);
             outputLayer = new OutputLayer(hiddenLayers[hiddenLayers.Length-1], 10);
         }
 
