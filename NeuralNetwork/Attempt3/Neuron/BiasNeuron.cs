@@ -16,7 +16,7 @@ namespace NeuralNetwork.Attempt3
 
         public override void SetValue(double value)
         {
-            throw new Exception("bias peut pas changer");
+            //rien
         }
     }
 }

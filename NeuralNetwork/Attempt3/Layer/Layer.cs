@@ -26,22 +26,7 @@ namespace NeuralNetwork.Attempt3
                 {
                     for (int j = 0; j < neurons.Length; j++)
                     {
-                        new Weight(previousLayer.neurons[i], neurons[j], random.NextDouble() * 2 - 1);
-                    }
-
-                }
-            }
-        }
-
-        public void ConnectToLeft(Layer previousLayer, double[,] weightValue)
-        {
-            if (previousLayer != null)
-            {
-                for (int i = 0; i < previousLayer.neurons.Length; i++)
-                {
-                    for (int j = 0; j < neurons.Length; j++)
-                    {
-                        new Weight(previousLayer.neurons[i], neurons[j], weightValue[i, j]);
+                        new Weight(previousLayer.neurons[i], neurons[j], (random.NextDouble() * 2) - 1);
                     }
 
                 }

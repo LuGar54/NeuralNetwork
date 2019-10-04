@@ -11,34 +11,34 @@ namespace NeuralNetwork.Attempt3
     {
         private const double LEARN_RATE = 0.001;
 
-        private Neuron from;
-        private Neuron to;
+        private Neuron left;
+        private Neuron right;
 
         private double value;
 
         public double Error { get; set; }
 
-        public Weight(Neuron from, Neuron to, double value)
+        public Weight(Neuron left, Neuron right, double value)
         {
-            this.from = from;
-            from.rightWeights.Add(this);
+            this.left = left;
+            left.rightWeights.Add(this);
 
-            this.to = to;
-            to.leftWeights.Add(this);
+            this.right = right;
+            right.leftWeights.Add(this);
 
             this.value = value;
         }
 
         public double GetWeightedWeight()
         {
-            return from.Value * value;
+            return left.Value * value;
         }
 
         public void BackPropagate(double error)
         {
             Error = error * value;
 
-            value += LEARN_RATE * error * from.Value;
+            value += LEARN_RATE * error * left.Value;
         }
 
     }

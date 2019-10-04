@@ -16,13 +16,6 @@ namespace NeuralNetwork.Attempt3
             ConnectToLeft(lastHiddenLayer);
         }
 
-        public OutputLayer(Layer lastHiddenLayer, int nbrNeurons, double[,] weights)
-        {
-            InitiateNeurons(nbrNeurons);
-
-            ConnectToLeft(lastHiddenLayer, weights);
-        }
-
         private void InitiateNeurons(int nbrNeurons)
         {
             neurons = new OutputNeuron[nbrNeurons];

@@ -13,15 +13,15 @@ namespace NeuralNetwork.Attempt3
         {
             inputLayer = new InputLayer(784);
             hiddenLayers = new HiddenLayer[2];
-            hiddenLayers[0] = new HiddenLayer(inputLayer, 16);
-            hiddenLayers[1] = new HiddenLayer(hiddenLayers[0], 16);
-            outputLayer = new OutputLayer(hiddenLayers[1], 10);
+            hiddenLayers[0] = new HiddenLayer(inputLayer, 500);
+            hiddenLayers[1] = new HiddenLayer(inputLayer, 100);
+            outputLayer = new OutputLayer(hiddenLayers[hiddenLayers.Length-1], 10);
         }
 
         public void FeedForward(double[] inputs)
         {
             inputLayer.SetInput(inputs);
-            inputLayer.FeedForward();
+            //inputLayer.FeedForward();
 
             for (int i = 0; i < hiddenLayers.Length; i++)
             {

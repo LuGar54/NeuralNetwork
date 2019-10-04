@@ -11,12 +11,14 @@ namespace NeuralNetwork.Attempt3
     {
         public HiddenLayer(Layer previousLayer, int nbrNeurons)
         {
-            neurons = new HiddenNeuron[nbrNeurons];
+            neurons = new Neuron[nbrNeurons+1];
 
             for (int i = 0; i < nbrNeurons; i++)
             {
                 neurons[i] = new HiddenNeuron();
             }
+
+            neurons[nbrNeurons] = new BiasNeuron();
 
             ConnectToLeft(previousLayer);
         }

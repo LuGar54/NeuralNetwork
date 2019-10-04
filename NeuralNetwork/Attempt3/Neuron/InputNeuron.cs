@@ -21,7 +21,8 @@ namespace NeuralNetwork.Attempt3
 
         public override double LossFunction()
         {
-            throw new Exception("call sur input, faut pas");
+            //rien
+            return 0;
         }
     }
 }
